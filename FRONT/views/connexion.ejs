@@ -1,0 +1,24 @@
+<br><h4>Connexion</h4>
+
+<form action="/connexion" method="post">
+    <% if(locals.error){ %> 
+        <div class="alert alert-danger"><%= locals.error %> </div>
+    <% } %> 
+    <div><br>
+        <input type="email" id="mail" name="email" placeholder="E-mail" Required>
+        <div class="error-message">erreur</div>
+    </div>
+    <br>
+    <div>
+        <input type="password" id="mdp" name="password" placeholder="Mot de passe" Required>
+        <div class="error-message">erreur</div>
+    </div>
+    <br>
+    <a href="#"><div class="mdpOubli">Mot de passe oublié ?</div></a>
+    <br>
+    <div>
+        <button type="submit" class="button_co" id="se_connecter">Se Connecter</button>
+    </div>  
+</form><br><br><br>
+       
+<a href="/inscription"><button class="button_sub2">⮩ Créer un nouveau compte</button></a><br><br>

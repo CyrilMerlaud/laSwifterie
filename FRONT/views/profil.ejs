@@ -1,0 +1,37 @@
+<h4>Profil</h4>
+ 
+<form action="/profil" method="post">
+    <div>          <!--req.body.username  -->
+        <img src="/img/uploads/<%= locals.profil.success.attachment %>" name="attachment" class="avatar"/>
+        
+        <input type="file" id="editattachment" name="attachment"><br><br>
+        
+        <label><h5>Compte de <%= locals.profil.success.username %></h5></label><br>
+        
+        <label>Bio : <%= locals.profil.success.bio %></label><br><br>
+        
+        
+        <input type="text" id="editusername" name="username" placeholder="Modifier mon pseudo ici"> 
+        <input type="text" id="editbio" name="bio" placeholder="Modifier ma bio ici">
+        <div class="error-message">erreur</div>
+    </div><br>
+     
+    <button type="submit" id="edit_profil">Mettre à jour</button> 
+</form>
+   
+<div>
+    <form action="/logout" method="post">
+        <button id="deco_profil">Se déconnecter</button>
+    </form>
+    
+    <form action="/delete" method="post">
+        <button type="submit" onclick="return confirm('Voulez-vous vraiment SUPPRIMER votre compte ?')" id="suppr_profil">Supprimer mon compte</button>
+    </form>
+</div>
+            
+        
+    
+        
+
+        
+

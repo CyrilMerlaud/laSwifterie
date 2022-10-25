@@ -1,0 +1,91 @@
+
+<div class="col-6 container" class="shadow p-3 mb-5 bg-body rounded">
+    <form action="/fil_actu" method="post" onctype="multipart/form-data">
+        <input type="text"  name="content" class="form-control" id="cont_pub" placeholder="ÉCRIRE UN MESSAGE"><br>
+        <input type="file" name="attachment" class="form-control" id="att_pub"><br>
+        <input type="submit" value="▀▄▀▄▀▄ [ Publier ! ] ▄▀▄▀▄▀" class="btn btn-outline-dark" id="btn_fil">
+    </form><br>
+    <h4 id="titre_actu">Fil d'actualité</h4>
+    <% locals.infoPost.reverse().forEach(function(item){ %>
+      <div class="col-12 card">       
+        <div class="card-body">
+              <h5 class="card-title">   
+                Utilisateur <%= item.userId %> | publié le : <span><%= item.createdAt %></span>  
+              </h5>
+        </div>
+        <div class="card-body">
+            <p id="post_content"><%= item.content %></p>
+    
+          <% if (item.attachment !== "") {  %>            <!--DEBUT condition pour ne pas afficher une image vide -->
+            <img src="/img/uploads/<%= item.attachment %>" alt="image" class="img-fluid">
+          <% } else null %>                               <!--FIN -->
+
+          <span>(<%= item.likeCount %>)</span>  
+          <form action="/postlike/<%= item.id %>" method="post">
+            <button type='submit' class="card-link" id="like_post">👍</button>
+          </form>
+
+          <form action="/postunlike/<%= item.id %>" method="post">
+            <button type='submit' class="card-link" id="unlike_post">👎</button>
+          </form>
+
+          
+          <form action="/fil_actu/<%= item.id %>" method="post" onctype="multipart/form-data">
+            <input type="text"  name="content" class="form-control" placeholder="MODIFIER LE MESSAGE">
+            <input type="file" name="attachment" class="form-control">
+            <button type="submit" class="card-link" id="edit_post">⮚ MODIFIER la publication ⮘</button>
+          </form>
+          
+          <form action="/deletepost/<%= item.id %>" method="post">
+            <button type='submit' onclick="return confirm('SUPPRIMER cette publication ?')" class="card-link" id="delete_post">⮚ SUPPRIMER la publication ⮘</button>
+          </form>
+          
+          <form action="/comment/<%= item.id %>" method="post">
+            <input type="text"  name="content" class="form-control" placeholder="COMMENTER LA PUBLICATION">
+            <button type='submit' class="card-link" id="comment_post">⮚ COMMENTER la publication ⮘</button>
+          </form><br>
+
+          <p>▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀</p>
+
+          <% if (locals.infoComments) { %>
+              <% locals.infoComments.forEach(function(comment){ %>
+                <% if (comment.postId == item.id) { %>
+                  <h6 class="card-title-com">
+                    Username :  ??? |
+                    Com : <%= comment.id %> |
+                    UserId : <%= comment.userId %> |
+                    PostId : <%= comment.postId %> 
+                  </h6>
+                    <p class="com_content"><%= comment.content %></p>
+                    <div class="icons">
+
+                      <form method="post" action="/post/<%= comment.postId %>/updatecomment/<%= comment.id %>">   
+                        <button type="submit" id="update_com_icon">modifier</button>
+                        <input type="text"  name="content" class="form-control" id="edcom" placeholder="le commentaire ici">
+                      </form>
+
+                      <form method="post" action="/post/<%= comment.postId %>/deletecomment/<%= comment.id %>">
+                        <button type="submit" id="delete_com_icon" onclick="return confirm('SUPPRIMER ce commentaire ?')">supprimer</button>
+                      </form>
+
+                    </div>    
+                <% } %>
+              <% }) %> 
+          <% } %> 
+
+        </div>   
+      </div><br><br>
+    <% }) %>
+</div>
+   
+
+
+    
+
+
+
+
+
+
+
+

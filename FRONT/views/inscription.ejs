@@ -1,0 +1,27 @@
+<br><h4>Inscription</h4><br>
+<% if(locals.error){ %> 
+    <div class="alert alert-danger"><%= locals.error %> </div>
+<% } %> 
+
+<form action="/inscription" method="post">
+    <div>
+        <input type="text" id="username" name="username" placeholder="Pseudo" Required>
+        <div class="error-message">erreur</div>
+    </div><br>
+    <div>
+        <input type="email" id="email" name="email" placeholder="E-mail" Required>
+        <div class="error-message">erreur</div>
+    </div><br>
+    <div>
+        <input type="password" id="password" name="password" placeholder="Mot de passe" Required>
+        <div class="error-message">erreur</div>
+    </div><br>
+    <div>
+        <button type="submit" class="button_sub" id="s_inscrire">Créer un compte</button>
+    </div>        
+</form><br><br><br>
+   
+<div>
+    <a href="/connexion"><button class="button_co2">⮪ Revenir à Connexion</button></a><br><br> 
+    <a href="/about"><button class="button_about">⮩ À Propos</button></a>
+</div>
